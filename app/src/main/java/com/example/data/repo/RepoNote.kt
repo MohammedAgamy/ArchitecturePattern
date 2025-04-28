@@ -1,6 +1,6 @@
-package com.example.repo
+package com.example.data.repo
 
-import com.example.data.NoteModel
+import com.example.data.model.NoteModel
 
 interface RepoNote {
     suspend fun add(noteModel: NoteModel)

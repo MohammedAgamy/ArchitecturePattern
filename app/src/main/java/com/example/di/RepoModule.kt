@@ -1,8 +1,9 @@
-package com.example.repo
+package com.example.di
 
+import com.example.data.repo.RepoImpl
+import com.example.data.repo.RepoNote
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton

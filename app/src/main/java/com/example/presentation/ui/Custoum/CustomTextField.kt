@@ -1,6 +1,7 @@
-package com.example.trystate.ui.Custoum
+package com.example.presentation.ui.Custoum
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
@@ -42,7 +43,7 @@ fun CustomTextField(
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         singleLine = true,
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth().height(45.dp)
             .padding(horizontal = 10.dp),
 
         colors = TextFieldDefaults.colors(

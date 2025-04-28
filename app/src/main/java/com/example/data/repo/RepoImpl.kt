@@ -1,13 +1,16 @@
-package com.example.repo
+package com.example.data.repo
 
-import com.example.data.NoteModel
+import com.example.data.model.NoteModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
-class RepoImpl @Inject constructor():RepoNote {
+class RepoImpl @Inject constructor(): RepoNote {
 
+
+    // don't used repoNote in inject (Loop )
+    // used instant from repoNote
     private val notes = mutableListOf<NoteModel>()
 
     override suspend fun add(noteModel: NoteModel) {
@@ -19,6 +22,6 @@ class RepoImpl @Inject constructor():RepoNote {
     }
 
     override suspend fun showAll(): List<NoteModel> {
-        TODO("Not yet implemented")
+      return notes
     }
 }
