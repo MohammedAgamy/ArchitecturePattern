@@ -18,18 +18,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.data.model.NoteModel
+import com.example.event.NoteIntent
 import com.example.presentation.viewmodel.ModelMVVM
 import com.example.trystate.R
 import com.example.presentation.ui.Custoum.CustomTextField
+import com.example.presentation.viewmodel.ModelMVI
 
 
 @Composable
-fun MainUi(modelMVVM: ModelMVVM) {
+fun MainUi(modelMVI: ModelMVI) {
     val context = LocalContext.current
-    val addNoteState by modelMVVM.addNoteState.collectAsState()
+    // val addNoteState by modelMVVM.addNoteState.collectAsState()
 
+    val state by modelMVI.state.collectAsState()
 
-    addNoteState.let { not ->
+    state.let { not ->
         Text(text = "تم إضافة الملاحظة: ")
 
     }
@@ -71,7 +74,8 @@ fun MainUi(modelMVVM: ModelMVVM) {
 
         Button(onClick = {
             if (titleError == null && noteError == null && title.isNotEmpty() && note.isNotEmpty()) {
-                modelMVVM.addNote(NoteModel(title = title, noteTD = note, id = 3))
+                val note = NoteModel(title = title, noteTD = note, id = 3)
+                modelMVI.processIntent(NoteIntent.AddName(note))
                 Toast.makeText(context, "تمت إضافة النوت بنجاح ✅", Toast.LENGTH_SHORT).show()
             }
 
@@ -82,7 +86,7 @@ fun MainUi(modelMVVM: ModelMVVM) {
         Spacer(modifier = Modifier.height(30.dp))
 
         LazyColumn {
-            items(addNoteState) { note ->
+            items(state.notes) { note ->
                 Text(text = "${note.id} - ${note.title}: ${note.noteTD}")
             }
         }
